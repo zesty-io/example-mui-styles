@@ -5,11 +5,11 @@ const headerFontSize = styles['font-size-base'];
 export default function ZestyStyleVariables() {
   const zestySettingsTheme = createTheme({
     palette: {
-     primary: {
+      primary: {
         main: `${styles['brand-primary'] || '#42a5f5'}`,
       },
       secondary: {
-        main: `${styles['gray-base'] || '#ab47bc'}`,
+        main: `${styles['brand-secondary'] || '#ab47bc'}`,
       },
       success: {
         main: `${styles['brand-success'] || '#388e3c'}`,
