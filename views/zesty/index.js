@@ -3,15 +3,7 @@
  // This file is overwritten everytime the integration script is run
      
  import Homepage from './Homepage';
-import Clipping from './Clipping';
-import Widget from './Widget';
-import Layout from './Layout';
-import ABExample from './ABExample';
-import ABOption from './ABOption';
-import Personalization from './Personalization';
-import Persona from './Persona';
-import Article from './Article';
  
  export {
-   Homepage, Clipping, Widget, Layout, ABExample, ABOption, Personalization, Persona, Article
+   Homepage
  }
