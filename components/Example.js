@@ -506,7 +506,14 @@ export default function Example() {
               <code style={{ color: 'green', fontSize: '1rem' }}>
                 {'<Button>'}
               </code>{' '}
-              component, <Link>click here</Link>.
+              component,{' '}
+              <Link
+                href="https://mui.com/material-ui/react-button/"
+                target="_blank"
+              >
+                click here
+              </Link>
+              .
             </Typography>
           </Card>
         </Box>
