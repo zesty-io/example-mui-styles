@@ -251,7 +251,7 @@ export default function Example() {
               }}
             >
               <text>
-                {`<Typography sx={{color: "primary.main"}}> 
+                {`<Typography color="primary.main"> 
                 Hello World 
                 </Typography>`}
               </text>
