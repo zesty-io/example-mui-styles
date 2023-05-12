@@ -1,8 +1,8 @@
 # Material UI Styles Examples
 
-This next starter app contains the Material UI component examples which also the styles are fetched from the zesty instance style-variables.
+This nextjs app contains the Material UI component examples which makes use of the style variables fetched from a Zesty instance.
 
-[Click Here](https://github.com/zesty-io/module-mui-styles/blob/yaml-module-version/README.md) for more details of **Instance Style Variables** to **Material UI**
+This example uses the [MUI style settings module](https://github.com/zesty-io/module-mui-styles). After the module has been installed to your instance, you can make use of the style variables imported and edited within the Manager interface.
 
 ## Theme colors:
 
@@ -37,17 +37,22 @@ Applying theme colors to a [Typography](https://mui.com/material-ui/api/typograp
 ```
 
 
-## Deploying example app to GCP   
+## Deploying   
 
-1. Setup App web engine services.
+This example makes use of GCP's App Engine service. You can use any solution you would like to host your app build.
 
-## Setup a URL proxy of MUI examples to an instance
-1.  Ensure the instance has proxy settings.
+1. Setup a new App Engine service.
+2. Run your app build then deploy to your AE service.
+3. Copy the generated app URL.
+
+## Setup proxy settings in Zesty
+1.  In your instance settings, check that you have proxy settings installed. The below screenshot shows that this instance does not have the settings installed. We will now walk through the installation process.
 ![image](https://github.com/b-estevez/example-mui-styles/assets/55866499/3dd79464-317b-4c73-8db9-f594c763f2a7)
 
-- If no proxy settings, kindly create using Instance API settings [/env/createsettings](https://instances-api.zesty.org/#56267a59-88a5-40b0-bd1c-a23de605a6e4)
-- Please make sure to create settings with the correct Instance ZUID
-- Request body to create settings for both live and stage
+- Use Zesty's Instance API [Create Setting](https://instances-api.zesty.org/#56267a59-88a5-40b0-bd1c-a23de605a6e4) endpoint
+- Note that you will need to be [authenticated](https://auth-api.zesty.org/#28b40e26-196b-4283-a483-40a5b537bc22) and you will need to use your instance's ZUID (begins with an 8- ) to make this request.
+- The following request payoloads are used to create settings for both live and stage. Be sure to replace the value object with your app's hosted URL.
+
 
 Dev / Stage
 ```json
@@ -80,8 +85,9 @@ Live
 
 ```
 
-Created proxy settings will look like this <br>
+We can now see the proxy settings in the instance. <br>
 ![image](https://github.com/b-estevez/example-mui-styles/assets/55866499/2ea66ac0-c41d-42a2-b8f9-965e23ca295d)
 
 
-- Once the proxy settings is created, the webengine will map the proxy URLs to both environments (Stage and Live).
+- Once the proxy settings is created and the url values are added, Webengine will map the proxy URLs to both environments (Stage and Live).
+- You can now use your instance's configured domains to view your app's content. More on proxying content can be found [here](https://zesty.org/services/web-engine/file-proxy).
