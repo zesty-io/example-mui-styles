@@ -1,0 +1,5 @@
+{
+  "name": "Sync Instance Styles Example",
+  "settings": "settings.yaml",
+  "style-variables": "style-variables.yaml"
+}

@@ -1,0 +1,18 @@
+- category: "proxy"
+  key: "dev"
+  keyFriendly: "Proxy Dev URL"
+  value: "https://example-mui-styles-dot-gb-zesty.uc.r.appspot.com/"
+  admin: false
+  parsleyAccess: null
+  dataType: "text"
+  options: null
+  tips: "Root URL to proxy file store"
+- category: "proxy"
+  key: "live"
+  keyFriendly: "Proxy Live URL"
+  value: "https://example-mui-styles-dot-gb-zesty.uc.r.appspot.com/"
+  admin: false
+  parsleyAccess: null
+  dataType: "text"
+  options: null
+  tips: "Root URL to proxy file store"
