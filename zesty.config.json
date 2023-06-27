@@ -1,0 +1,13 @@
+{
+         "instance_zuid": "8-dcb09bb3a4-ld44lg",
+         "stage": "https://jwctrxq3-dev.webengine.zesty.io",
+         "production": "http://syncinstancestylesexample.zesty.dev", 
+         "stage_password": "f27016",
+         "src_dir": "",
+         "options": {
+           "skip_config_overwrite": false, 
+           "model_ignore_list": [
+             "6-xyz" 
+           ]
+         }
+     }
