@@ -1,151 +1,99 @@
-# <img src="https://user-images.githubusercontent.com/729972/155242158-157ca88c-9047-4671-bd09-2bbef7035022.png" width="25" style="margin-bottom:-3px"> Zesty.io + Next.js
+# Material UI Styles Examples
 
-> Quick start [Next.js](https://nextjs.org/) v12 with [Zesty.io]() as a data source
+This nextjs app contains the Material UI component examples which makes use of the style variables fetched from a Zesty instance.
 
-## Getting Started
+This example uses the [MUI style settings module](https://github.com/zesty-io/module-mui-styles). After the module has been installed to your instance, you can make use of the style variables imported and edited within the Manager interface.
 
-0. Requirements
+## Theme colors:
 
-- [Node.js 16](https://nodejs.org/en/)
-- [npm](https://www.npmjs.com/)
+`Primary` = $\color{#0d6efd}{\textsf{brand-primary}}$ <br>
+`Secondary` = $\color{#6c757d}{\textsf{brand-secondary}}$ <br>
+`Success` = $\color{#198754}{\textsf{brand-success}}$ <br>
+`Info` = $\color{#0dcaf0}{\textsf{brand-info}}$ <br>
+`Warning` = $\color{#ffc107}{\textsf{brand-warning}}$ <br>
+`Error` = $\color{#dc3545}{\textsf{brand-error}}$ <br>
 
-1. Install
+Using [`sx`](https://mui.com/system/getting-started/the-sx-prop/) prop to apply theme color
 
-Add Zesty CLI (you may need to sudo this command)
-```Bash
-npm install -g @zesty-io/cli
+```javascript
+<Typography sx={{ color: "primary.main" }}> Hello World </Typography>
 ```
 
-Run the Next.js marketing
-```Bash
-npx create-next-app --example https://github.com/zesty-io/nextjs-starter
+Applying theme color directly to [`color`](https://mui.com/material-ui/customization/color/) prop
+
+```javascript
+<Typography color="primary.main"> Hello World </Typography>
 ```
 
-*The install process will let you use an existing account or create a new. When using an existing account you will be prompted to select from your available instances.*
+Applying theme colors to a [Typography](https://mui.com/material-ui/api/typography/) component with header variant
 
-2. Change directory to your project
-
-```Bash
-# Use the name you chose for your directory
-cd my-app
+```javascript
+<Typography variant="h1" color="primary.main">
+  {" "}
+  Hello World{" "}
+</Typography>
 ```
 
-3. Start development server
+[Button](https://mui.com/material-ui/react-button/) component with theme colors
 
-```Bash
-npm run dev
+```javascript
+<Button variant="contained" color="success">
+  {" "}
+  Primary{" "}
+</Button>
 ```
 
-4. Open application
+## Deploying
 
-open browser to http://localhost:3000/
+This example makes use of GCP's App Engine service. You can use any solution you would like to host your app build.
 
-## Syncing Zesty.io Models
+1. Setup a new App Engine service.
+2. Run your app build then deploy to your AE service.
+3. Copy the generated app URL.
 
-As you develop your Zesty.io instance you will commonly add new content models. In order for new content pages to render in nextjs, there needs to be a relative model component in `views/zesty` to get the lastest models components you can run a script to sync. Do so by running the following command at the root of your project.
+## Setup proxy settings in Zesty
 
-```
-npm run sync
-```
+1.  In your instance settings, check that you have proxy settings installed. The below screenshot shows that this instance does not have the settings installed. We will now walk through the installation process.
+    ![image](https://github.com/b-estevez/example-mui-styles/assets/55866499/3dd79464-317b-4c73-8db9-f594c763f2a7)
 
-This sync script will create new files where needed, but will not overwrite existing files.
+- Use Zesty's Instance API [Create Setting](https://instances-api.zesty.org/#56267a59-88a5-40b0-bd1c-a23de605a6e4) endpoint
+- Note that you will need to be [authenticated](https://auth-api.zesty.org/#28b40e26-196b-4283-a483-40a5b537bc22) and you will need to use your instance's ZUID (begins with an 8- ) to make this request.
+- The following request payoloads are used to create settings for both live and stage. Be sure to replace the value object with your app's hosted URL.
 
-## Working with Zesty View Components
+Dev / Stage
 
-After a `npm run sync` a view component is created for each Zesty Content Model in the `views/zesty` directory. Zesty Content Items that have URL will automatically resolve to the component in that `views` directory that is assocaited with the content models name.
-
-Each Component loads with a {content} object, this object is a direct feed of that URLs ?toJSON response.  [Read about toJSON](https://zesty.org/services/web-engine/introduction-to-parsley/parsley-index#tojson)
-
-![Diagram showing toJSON data fetching](https://jvsr216n.media.zestyio.com/nextjs-external-delivery-architecture.jpg)
-
-
-# Custom Integration and the next.config.js file
-
-Here is an explanation of the next.js zesty integration, use this information to setup a custom integration or to modify this marketing in your own project. 
-
-**Required files:**
-
-These files should only be modified for customize integrations.
-
-* `pages/[...slug].js` - this is a dynamic catch all routes file, hard written paths and files will superceed it. This file will look for content in zesty relative to the requested path `/about/` for example looks for content in zesty that matches the `/about/` path, if it fails to find content it will 404. Instead of 404ing, you can code this to default to your base application component. 
-* `pages/index.js` - if you intent to run zesty to power you homepage, you need index.js to reference the [...slug].js file
-* `lib/sync.js` this file read the next.config.js file to create new views/zesty/ components to map to the connected instance's content models it can be modified to ignore specific models. Sync will attempt to overwrite your next.config.js file if there are missing values.
-* `lib/ZestyView.js` the dynamic component which autoloads the relative content model components from views/zesty based on the url path in the request.
-* `lib/api.js` this file includes the dynamic fetch request to get zesty content and navigation bsed on the relative url path form the request.
-* `components/ZestyHead.js` Used by ZestyView.js, an optional `<head>` component that dybamic sets up meta data for zesty content items that have pages in nextjs.
-
-**Optional Files**
-
-These files can be removed if there references are removed.
-
-* `components/Header.js` marketing example file, not needed.
-* `components/Footer.js` marketing example file, not needed.
-* `components/ZestyTutorial.js` marketing example file, not needed.
-* `lib/zestyLink.js` an optional component which it used to make URL path lookup given a relative content ZUID. It requires `zestyURL+'/-/headless/routing.json` as the nav array, and content item ZUID e.g. `7-xyz-xyz`.  
-* `layout/` this directory is used to create a generic page layouts, and can be removed or customized.
-
-
-### next.config.js
-
-In order for the integration to work, you need `trailingSlash: true` and the `env.zesty: {}` object. See the below example.
-
-```next.config.js
-// generated by lib/sync.js
-module.exports = {
-  trailingSlash: true,
-  eslint: {
-    ignoreDuringBuilds: true
-  },
-  env: {
-      zesty: {
-          instance_zuid: "", // zesty unique id of content instance
-          stage: "", // e.g. https://XYZ-dev.webengine.zesty.io
-          production: "", // e.g. https://www.acme.com
-          stage_password: "",
-          src_dir: "", // where the next project has pages, components, etc folders
-          options: {
-            skip_config_overwrite: false, // for setups with custom config files, after initial setup of the env.zesty object, set to true
-            model_ignore_list: [
-              '6-xyz-xyz',
-              '6-xyz-xyz' // an array of models ZUIDs to ignore when creating component files in views/zesty
-            ]
-          }
-
-      }
-  }
+```json
+{
+  "category": "proxy",
+  "keyFriendly": "Proxy Dev URL",
+  "key": "dev",
+  "value": "YOUR BUCKET URL",
+  "admin": false,
+  "parselyAccess": false,
+  "dataType": "text",
+  "options": null,
+  "tips": "Root URL to proxy file store"
 }
 ```
 
-*If trailingSlash needs to be false in your project, then the `lib/api.js` fetch call will need to modifed to append a trailing slash. In this scenario, webengine preview proxying your nextjs app will fail.*
+Live
 
-# How to uninstall the Starting Tutorial
-
-The starting tutorial comes with a couple packages and components
-
-* MUI (mui.com)
-* Material Icons
-* views/tutorials (directory)
-
-### Uninstall Material UI (MUI)
-
-```bash
-npm uninstall @mui/material @mui/styled-engine-sc styled-components
+```json
+{
+  "category": "proxy",
+  "keyFriendly": "Proxy Live URL",
+  "key": "live",
+  "value": "YOUR BUCKET URL",
+  "admin": false,
+  "parselyAccess": false,
+  "dataType": "text",
+  "options": null,
+  "tips": "Root URL to proxy file store"
+}
 ```
 
-### Uninstall Material Icons
+We can now see the proxy settings in the instance. <br>
+![image](https://github.com/b-estevez/example-mui-styles/assets/55866499/2ea66ac0-c41d-42a2-b8f9-965e23ca295d)
 
-```bash
-npm uninstall @mui/icons-material
-```
-
-### Delete Tutorials
-
-From terminal change directory to project root. 
-
-```bash
-rm -Rf views/tutorials
-```
-
-Open `pages/index.js` delete the line `import Tutorial from 'views/tutorial/` and the line `<Tutorial/>`
-
-
+- Once the proxy settings is created and the url values are added, Webengine will map the proxy URLs to both environments (Stage and Live).
+- You can now use your instance's configured domains to view your app's content. More on proxying content can be found [here](https://zesty.org/services/web-engine/file-proxy).
